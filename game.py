@@ -81,15 +81,12 @@ def perform_move(field, key):
     empty_index = field.index(EMPTY_MARK) # положение пустой клетки
     move = MOVES[key] # переданные ходы пользователя
     target_index = empty_index + move #
-    if target_index < 0 or target_index >= len(field) or is_valid_move(empty_index, target_index):
+    if target_index < 0 or target_index >= len(field) or (empty_index % 4 == 0 and empty_index - target_index == 1) or (target_index % 4 == 0 and target_index - empty_index == 1):
         raise IndexError("You shall not pass!")
     else:
         field[empty_index] = field[target_index]
         field[target_index] = EMPTY_MARK
     pass
-
-def is_valid_move(start_index, target_index):
-    return (start_index % 4 == 0 and start_index - target_index == 1) or (target_index % 4 == 0 and target_index - start_index == 1)
 
 
 def handle_user_input():
